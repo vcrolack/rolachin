@@ -1,0 +1,24 @@
+{
+  "name": "rolachin",
+  "version": "1.0.0",
+  "description": "It's an music bot for my discord server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vcrolack/rolachin.git"
+  },
+  "author": "Rolack dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vcrolack/rolachin/issues"
+  },
+  "homepage": "https://github.com/vcrolack/rolachin#readme",
+  "dependencies": {
+    "discord-player": "^6.6.8",
+    "discord.js": "^14.14.1",
+    "express": "^4.19.2"
+  }
+}
