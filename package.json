@@ -4,7 +4,9 @@
   "description": "It's an music bot for my discord server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsnd --env-file .env --respawn --clear src/index.ts",
+    "build": "rimraf ./dist && tsc",
+    "start": "npm run build && node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,14 @@
     "discord-player": "^6.6.8",
     "discord.js": "^14.14.1",
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.5",
+    "nodemon": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.4.4"
   }
 }
