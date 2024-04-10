@@ -1,10 +1,9 @@
-import { Client, Interaction, VoiceChannel } from "discord.js";
-import { DiscordCommandsName } from "../config/discord/commands";
+import { Client, Interaction } from "discord.js";
 import { checkVoiceChannel } from "../utils";
 import { useMainPlayer } from "discord-player";
 
  
-export const play = async (client: Client,interaction: Interaction) => {
+export const play = async (client: Client, interaction: Interaction) => {
 
   if (!interaction.isCommand()) return;
 
@@ -16,7 +15,7 @@ export const play = async (client: Client,interaction: Interaction) => {
 
     const query = interaction.options.get('query')?.value?.toString();
 
-    if (!query) return await interaction.editReply('Debes colocar una canción');
+    if (!query) return await interaction.editReply('Debes colocar una canción. Espabila!');
 
     await interaction.deferReply();
 
@@ -39,7 +38,7 @@ export const play = async (client: Client,interaction: Interaction) => {
         },
       });
 
-      return await interaction.editReply(`**${track.title}** enqueued!`);
+      return await interaction.editReply(`**${track.title}** agregada a la cola, chaval!`);
 
     } catch (error) {
       console.log('Ha ocurrido un error al buscar la pista, consulta con Carlomagnesio ', error);

@@ -1,11 +1,10 @@
 import { envs } from "./config/environment/variables.environment";
 import { commands } from "./config/discord/commands";
 
-import { Client, ClientOptions, Message, IntentsBitField, REST, Routes, GatewayIntentBits, ActivityType } from "discord.js";
-import { Player } from "discord-player";
+import { REST, Routes} from "discord.js";
 
-import { prefix } from "./config.json";
-import { init, play, testCommand } from "./events";
+import { init, play, queue, skip, testCommand } from "./events";
+import { DiscordController } from "./config/discord/discord-controller";
 
 const rest = new REST({ version: '10' }).setToken(envs.discordToken!);
 
@@ -19,34 +18,35 @@ try {
   console.error(error);
 }
 
-const client = new Client({ 
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates], 
-  presence: {
-    status: 'online', 
-    activities: [{
-      name: 'Modo Beto Bullicio',
-      type: ActivityType.Playing,
-    }],
-  }
-});
-const player = new Player(client, {
-  lagMonitor: 1000,
-  ytdlOptions: {
-    filter: "audioonly",
-    quality: "highestaudio",
-    highWaterMark: 1 << 25
-  }});
+const client = DiscordController.createClient();
+const player = DiscordController.createPlayer(client);
 
+// LISTENER OF EVENTS
 client.on('ready', (client) => {
   init(client, player);
 });
 
 client.on('interactionCreate', async interaction => {
-  testCommand(client, interaction);
-});
+  if (!interaction.isCommand()) return;
+  switch(interaction.commandName) {
 
-client.on('interactionCreate', async (interaction) => {
-  await play(client, interaction)
+    case 'ping':
+      testCommand(client, interaction);
+      break;
+    case 'play':
+      await play(client, interaction);
+      break;
+    case 'queue':
+      await queue(client, interaction);
+      break;
+    case 'skip':
+      await skip();
+      break;
+
+    default:
+      interaction.reply('Ingresa un comando válido');
+
+  }
 });
 
 player.events.on('playerStart', (queue, track) => {
