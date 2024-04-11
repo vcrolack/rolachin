@@ -1,6 +1,6 @@
 import { Client, Interaction } from "discord.js";
 import { checkVoiceChannel } from "../utils";
-import { useMainPlayer } from "discord-player";
+import { useMainPlayer, useQueue } from "discord-player";
 
  
 export const play = async (client: Client, interaction: Interaction) => {
@@ -9,6 +9,7 @@ export const play = async (client: Client, interaction: Interaction) => {
 
   if (interaction.commandName === 'play') {
     const player = useMainPlayer();
+    const queue = useQueue(interaction.guild!.id);
     const channel = await checkVoiceChannel(interaction);
 
     if(!channel) return;
@@ -25,12 +26,15 @@ export const play = async (client: Client, interaction: Interaction) => {
         
       });
 
-      if (!searchResult.tracks.length) {
+      // queue!.insertTrack(searchResult.tracks[0], -1);
+
+      if (!searchResult.hasTracks()) {
         await interaction.editReply('No se encontraron resultados.');
         return;
       }
 
       const track = searchResult.tracks[0];
+
 
       await player.play(channel, track, {
         nodeOptions: {
