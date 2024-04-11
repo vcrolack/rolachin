@@ -5,10 +5,12 @@ import { REST, Routes} from "discord.js";
 
 import { init, play, queue, skip, testCommand } from "./events";
 import { DiscordController } from "./config/discord/discord-controller";
+import { server } from './keep_alive';
 
 const rest = new REST({ version: '10' }).setToken(envs.discordToken!);
 
 try {
+  server();
   console.log('Started refreshing application (/) commands.');
 
   rest.put(Routes.applicationCommands(envs.appId!), { body: commands });
