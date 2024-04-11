@@ -7,7 +7,7 @@
     "dev": "tsnd --env-file .env --respawn --clear src/index.ts",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js",
-    "start:prod": "npm run build && node dist/index.js",
+    "start:prod": "npm run build && node --env-file .env dist/index.js",
     "register": "tsnd  --env-file .env src/config/plugin/discord/commands.discord.ts"
   },
   "repository": {
