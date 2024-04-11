@@ -1,6 +1,7 @@
 import { Client, Interaction } from "discord.js";
 import { checkVoiceChannel } from "../utils";
 import { useMainPlayer, useQueue } from "discord-player";
+import { currentTrackEmbed } from "../utils/embeds/current-track-embed";
 
  
 export const play = async (client: Client, interaction: Interaction) => {
@@ -32,13 +33,17 @@ export const play = async (client: Client, interaction: Interaction) => {
 
       const track = searchResult.tracks[0];
 
+      const trackEmbed = currentTrackEmbed(interaction, track);
+
       await player.play(channel, track, {
         nodeOptions: {
           metadata: interaction,
         },
       });
 
-      return await interaction.editReply(`**${track.title}** agregada a la cola, chaval!`);
+      return await interaction.editReply({
+        embeds: [ trackEmbed! ],
+      });
 
     } catch (error) {
       console.log('Ha ocurrido un error al buscar la pista, consulta con Carlomagnesio ', error);

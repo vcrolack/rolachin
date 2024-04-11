@@ -12,12 +12,12 @@ export const queueEmbed = (interaction: Interaction, queue: GuildQueue, queueTra
     .setTimestamp()
     .addFields(
       {
-        name: ":musical_note: Now Playing",
+        name: ":musical_note: Reproduciendo ahora",
         value: queue.currentTrack!.title,
         inline: true,
       },
       {
-        name: ":notes: Queue",
+        name: ":notes: Cola",
         value: queueTracks.map((track, idx) => (`${++idx} ${track.title}`)).join('\n'),
         inline: false,
       },
