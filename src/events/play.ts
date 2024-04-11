@@ -46,6 +46,13 @@ export const play = async (client: Client, interaction: Interaction) => {
       await player.play(channel, track, {
         nodeOptions: {
           metadata: interaction,
+          bufferingTimeout: 15000,
+          leaveOnStop: true,
+          leaveOnStopCooldown: 5000,
+          leaveOnEnd: true,
+          leaveOnEndCooldown: 15000,
+          leaveOnEmpty: true,
+          leaveOnEmptyCooldown: 300000,
         },
       });
 
