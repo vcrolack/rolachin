@@ -40,17 +40,13 @@ client.on('interactionCreate', async interaction => {
       await queue(client, player, interaction);
       break;
     case 'skip':
-      await skip();
+      await skip(interaction);
       break;
 
     default:
       interaction.reply('Ingresa un comando válido');
 
   }
-});
-
-player.events.on('playerStart', (queue, track) => {
-  queue.metadata.channel.send(`Reproduciendo **${track.title}**!`);
 });
 
 player.events.on('error', (queue, error) => console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`));

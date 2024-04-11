@@ -10,12 +10,9 @@ export const queue = async (client: Client, player: Player, interaction: Interac
 
     const queue = useQueue(interaction.guild!.id);
 
-    if (!queue) {
-      interaction.editReply('Nada pendiente que reproducir');
-      return;
-    }
+    console.log(queue?.tracks)
 
-    if (queue.tracks.toArray().length === 0) {
+    if (!queue || queue.tracks.toArray().length === 0) {
       interaction.editReply('Nada pendiente que reproducir');
       return;
     }
