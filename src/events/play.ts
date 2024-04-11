@@ -1,7 +1,7 @@
 import { Client, Interaction } from "discord.js";
-import { checkVoiceChannel } from "../utils";
 import { useMainPlayer, useQueue } from "discord-player";
-import { currentTrackEmbed } from "../utils/embeds/current-track-embed";
+
+import { addTrackEmbed, checkVoiceChannel, currentTrackEmbed } from "../utils";
 
  
 export const play = async (client: Client, interaction: Interaction) => {
@@ -35,6 +35,14 @@ export const play = async (client: Client, interaction: Interaction) => {
 
       const trackEmbed = currentTrackEmbed(interaction, track);
 
+      const queue = useQueue(interaction.guild!.id);
+      if (queue?.isPlaying()) {
+        const addTrack = addTrackEmbed(interaction, track);
+        queue.addTrack(track);
+        return await interaction.editReply({
+          embeds: [ addTrack! ],
+        })
+      }
       await player.play(channel, track, {
         nodeOptions: {
           metadata: interaction,
@@ -49,6 +57,5 @@ export const play = async (client: Client, interaction: Interaction) => {
       console.log('Ha ocurrido un error al buscar la pista, consulta con Carlomagnesio ', error);
       return interaction.followUp(`Ha ocurrido un error. Consulta con Carlomagnesio`);
     }
-
   }
 };
