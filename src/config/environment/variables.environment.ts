@@ -5,4 +5,5 @@ export const envs = {
   publicKey: process.env.PUBLIC_KEY,
   discordToken: process.env.DISCORD_TOKEN,
   discordUrl: process.env.DISCORD_URL,
+  smashId: process.env.SMASH_ID,
 }

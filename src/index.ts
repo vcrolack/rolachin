@@ -27,6 +27,8 @@ client.on('ready', (client) => {
 });
 
 client.on('interactionCreate', async interaction => {
+  if (interaction.guild!.id !== envs.smashId) return;
+
   if (!interaction.isCommand()) return;
   switch(interaction.commandName) {
 
