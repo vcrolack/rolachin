@@ -1,5 +1,5 @@
 {
   "routes": [
-    {"src": "/(.*)", "dest": "/src/keep_alive.ts"}
+    {"src": "/(.*)", "dest": "/src/keep_alive.server"}
   ]
 }
