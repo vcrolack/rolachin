@@ -37,7 +37,7 @@ client.on('interactionCreate', async interaction => {
       await play(client, interaction);
       break;
     case 'queue':
-      await queue(client, interaction);
+      await queue(client, player, interaction);
       break;
     case 'skip':
       await skip();
