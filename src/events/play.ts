@@ -14,7 +14,8 @@ export const play = async (client: Client, interaction: Interaction) => {
 
     if(!channel) return;
 
-    const query = interaction.options.get('query')?.value?.toString();
+    const queryOption = interaction.options.get('query');
+    const query = queryOption ? queryOption.value?.toString() : null;
 
     if (!query) return await interaction.editReply('Debes colocar una canción. Espabila!');
 
