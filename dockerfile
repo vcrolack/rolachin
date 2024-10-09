@@ -1,5 +1,5 @@
 FROM node:20.10.0-alpine3.19
-RUN apk add --no-cache make g++
+RUN apk add --no-cache make g++ ffmpeg opus
 RUN apk add --no-cache python3
 RUN ln -sf python3 /usr/bin/python
 WORKDIR /app
