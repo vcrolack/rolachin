@@ -1,0 +1,3 @@
+docker stop my-discord-bot
+docker rm my-discord-bot
+docker run -d --name my-discord-bot --env-file .env discord-bot
